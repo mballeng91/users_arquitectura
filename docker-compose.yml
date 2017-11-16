@@ -11,8 +11,8 @@ services:
       MYSQL_DATABASE: db_autenticate
       MYSQL_HOST: db_autenticateuser
   ms-autenticateuser:
-    #build: .
-    image: maplendar/users_ms_maplendar
+    build: .
+    #image: maplendar/users_ms_maplendar
     command: bash -c "sleep 40 && rm -f tmp/pids/server.pid && bundle exec rails db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
     ports:
       - "3000:3000"
