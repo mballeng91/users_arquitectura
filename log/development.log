@@ -1,0 +1,1406 @@
+  [1m[35m (110.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (159.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170921033437)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "age" varchar, "email" varchar, "password_digest" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170921033437"]]
+  [1m[35m (121.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-09-21 03:35:07.888877"], ["updated_at", "2017-09-21 03:35:07.888877"]]
+  [1m[35m (122.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (19.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "luis@mail.com"], ["password_digest", "$2a$10$Ob6zn2Gt0KfulD6EU84Wiez07MaT2iowrDO9yNArCv8wj71.03KxK"], ["created_at", "2017-09-21 04:22:13.243478"], ["updated_at", "2017-09-21 04:22:13.243478"]]
+  [1m[35m (308.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateItems (20170921042329)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170921042329"]]
+  [1m[35m (2643.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Started POST "/authenticate" for 127.0.0.1 at 2017-09-20 23:30:05 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"luis@mail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"luis@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "luis@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "luis@mail.com"], ["LIMIT", 1]]
+Completed 200 OK in 214ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/items" for 127.0.0.1 at 2017-09-20 23:32:00 -0500
+Processing by ItemsController#index as */*
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/items" for 127.0.0.1 at 2017-09-20 23:33:59 -0500
+Processing by ItemsController#index as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItem Load (0.0ms)[0m  [1m[34mSELECT "items".* FROM "items"[0m
+Completed 200 OK in 11ms (Views: 3.6ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-20 23:38:53 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/users" for 127.0.0.1 at 2017-09-20 23:54:43 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as */*
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-20 23:56:08 -0500
+Processing by UsersController#create as */*
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-20 23:56:19 -0500
+Processing by UsersController#create as */*
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 00:06:42 -0500
+Processing by UsersController#create as */*
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 00:11:09 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as */*
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 00:12:15 -0500
+Processing by UsersController#create as */*
+  Parameters: {"email"=>"liseth@mail.com", "password"=>"[FILTERED]", "user"=>{"email"=>"liseth@mail.com"}}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 00:14:45 -0500
+Processing by UsersController#create as */*
+  Parameters: {"email"=>"liseth@mail.com", "password"=>"[FILTERED]", "user"=>{"email"=>"liseth@mail.com"}}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 00:20:18 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  
+ActionController::RoutingError (No route matches [POST] "/users"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/items" for 127.0.0.1 at 2017-09-21 00:20:30 -0500
+Processing by ItemsController#create as */*
+  Parameters: {"name"=>"item1", "description"=>"texto-largo", "item"=>{"name"=>"item1", "description"=>"texto-largo"}}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 5ms (Views: 0.3ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/items" for 127.0.0.1 at 2017-09-21 00:36:16 -0500
+Processing by ItemsController#create as */*
+  Parameters: {"name"=>"item1", "description"=>"texto-largo", "item"=>{"name"=>"item1", "description"=>"texto-largo"}}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2017-09-21 00:38:33 -0500
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"luis@mail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"luis@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "luis@mail.com"], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "luis@mail.com"], ["LIMIT", 1]]
+Completed 200 OK in 206ms (Views: 0.2ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/items" for 127.0.0.1 at 2017-09-21 00:39:25 -0500
+Processing by ItemsController#create as */*
+  Parameters: {"name"=>"item1", "description"=>"texto-largo", "item"=>{"name"=>"item1", "description"=>"texto-largo"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "item1"], ["description", "texto-largo"], ["created_at", "2017-09-21 05:39:25.902634"], ["updated_at", "2017-09-21 05:39:25.902634"]]
+  [1m[35m (155.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 173ms (Views: 3.5ms | ActiveRecord: 156.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 12:56:09 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  
+ActionController::RoutingError (No route matches [POST] "/users"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 12:56:35 -0500
+Processing by UsersController#create as */*
+  Parameters: {"firt_name"=>"item1", "email"=>"lgbrcienoa@unal.edu.co", "user"=>{"email"=>"lgbrcienoa@unal.edu.co"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 37ms (Views: 0.3ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 12:58:36 -0500
+Processing by UsersController#create as */*
+  Parameters: {"firt_name"=>"item1", "last_name"=>"Briceño", "email"=>"ligibrial@unal.edu.co", "password_digest"=>"[FILTERED]", "user"=>{"last_name"=>"Briceño", "email"=>"ligibrial@unal.edu.co", "password_digest"=>"[FILTERED]"}}
+Unpermitted parameter: password_digest
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 5ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+  [1m[36mUser Load (45.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2017-09-21 12:59:44 -0500
+Processing by UsersController#create as */*
+  Parameters: {"firt_name"=>"item1", "last_name"=>"Briceño", "email"=>"ligibrial@unal.edu.co", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"last_name"=>"Briceño", "email"=>"ligibrial@unal.edu.co"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 7ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 13:01:18 -0500
+Processing by UsersController#create as */*
+  Parameters: {"firt_name"=>"item1", "last_name"=>"Briceño", "email"=>"ligibrial@unal.edu.co", "password_digest"=>"[FILTERED]", "password_digest_confirmation"=>"[FILTERED]", "user"=>{"last_name"=>"Briceño", "email"=>"ligibrial@unal.edu.co", "password_digest"=>"[FILTERED]"}}
+Unpermitted parameter: password_digest
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 16ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 13:02:53 -0500
+Error occurred while parsing request parameters.
+Contents:
+
+
+{"firt_name":"item1","last_name":"Briceño","email":"ligibrial@unal.edu.co",  " password": '123123123' , "password_confirmation": '123123123'}
+
+  
+ActionDispatch::ParamsParser::ParseError (814: unexpected token at '{"firt_name":"item1","last_name":"Briceño","email":"ligibrial@unal.edu.co",  " password": '123123123' , "password_confirmation": '123123123'}
+'):
+  
+actionpack (5.0.6) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.6) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.6) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.0.3) lib/rack/request.rb:57:in `fetch'
+rack (2.0.3) lib/rack/request.rb:57:in `fetch_header'
+actionpack (5.0.6) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.6) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.6) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.6) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.6) lib/abstract_controller/base.rb:126:in `process'
+actionpack (5.0.6) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.6) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:727:in `call'
+rack (2.0.3) lib/rack/etag.rb:25:in `call'
+rack (2.0.3) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.3) lib/rack/head.rb:12:in `call'
+activerecord (5.0.6) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.6) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.6) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.6) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 13:03:34 -0500
+Processing by UsersController#create as */*
+  Parameters: {"firt_name"=>"item1", "last_name"=>"Briceño", "email"=>"ligibrial@unal.edu.co", " password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"last_name"=>"Briceño", "email"=>"ligibrial@unal.edu.co"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 4ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 13:03:44 -0500
+Error occurred while parsing request parameters.
+Contents:
+
+
+{"firt_name":"item1","last_name":"Briceño","email":"ligibrial@unal.edu.co",  " password": '123123123' , "password_confirmation": '123123123'}
+
+  
+ActionDispatch::ParamsParser::ParseError (814: unexpected token at '{"firt_name":"item1","last_name":"Briceño","email":"ligibrial@unal.edu.co",  " password": '123123123' , "password_confirmation": '123123123'}
+'):
+  
+actionpack (5.0.6) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.6) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.6) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.0.3) lib/rack/request.rb:57:in `fetch'
+rack (2.0.3) lib/rack/request.rb:57:in `fetch_header'
+actionpack (5.0.6) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.6) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.6) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.6) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.6) lib/abstract_controller/base.rb:126:in `process'
+actionpack (5.0.6) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.6) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:727:in `call'
+rack (2.0.3) lib/rack/etag.rb:25:in `call'
+rack (2.0.3) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.3) lib/rack/head.rb:12:in `call'
+activerecord (5.0.6) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.6) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.6) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.6) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 13:04:21 -0500
+Processing by UsersController#create as */*
+  Parameters: {"\n{\"first_name\":\"item1\",\"last_name\":\"Briceño\",\"email\":\"ligibrial@unal.edu.co\",  \" password\": '123123123' , \"password_confirmation\": '123123123'}\n"=>"[FILTERED]"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:54:in `user_params'
+app/controllers/users_controller.rb:23:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 13:05:22 -0500
+Processing by UsersController#create as */*
+  Parameters: {"\n{\"first_name\":\"item1\",\"last_name\":\"Briceño\",\"email\":\"ligibrial@unal.edu.co\",  \" password\": '123123123' , \"password_confirmation\": '123123123'}\n"=>"[FILTERED]"}
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:54:in `user_params'
+app/controllers/users_controller.rb:23:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 13:05:44 -0500
+Processing by UsersController#create as */*
+  Parameters: {"\n{\"first_name\":\"item1\",\"last_name\":\"Briceño\",\"age\":\"12\",\"email\":\"ligibrial@unal.edu.co\",  \" password\": '123123123' , \"password_confirmation\": '123123123'}\n"=>"[FILTERED]"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:54:in `user_params'
+app/controllers/users_controller.rb:23:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 13:07:00 -0500
+Processing by UsersController#create as */*
+  Parameters: {"\n{\"first_name\":\"item1\",\"last_name\":\"Briceño\",\"age\":\"12\",\"email\":\"ligibrial@unal.edu.co\",  \" password\": '123123123' , \"password_confirmation\": '123123123'}\n"=>"[FILTERED]"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:54:in `user_params'
+app/controllers/users_controller.rb:23:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 13:08:22 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as */*
+  Parameters: {"\n{\"first_name\":\"item1\",\"last_name\":\"Briceño\",\"age\":\"12\",\"email\":\"ligibrial@unal.edu.co\",  \" password\": '123123123' , \"password_confirmation\": '123123123'}\n"=>"[FILTERED]"}
+Completed 400 Bad Request in 5ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:54:in `user_params'
+app/controllers/users_controller.rb:23:in `create'
+Started POST "/authenticate" for 127.0.0.1 at 2017-09-21 14:19:45 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"luis@mail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"luis@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "luis@mail.com"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "luis@mail.com"], ["LIMIT", 1]]
+Completed 200 OK in 195ms (Views: 0.2ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/items" for 127.0.0.1 at 2017-09-21 14:20:16 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/items"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/items" for 127.0.0.1 at 2017-09-21 14:20:39 -0500
+Processing by ItemsController#index as */*
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItem Load (1.0ms)[0m  [1m[34mSELECT "items".* FROM "items"[0m
+Completed 200 OK in 40ms (Views: 9.2ms | ActiveRecord: 3.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:22:52 -0500
+Processing by UsersController#create as */*
+  Parameters: {"\n{\"first_name\":\"item1\",\"last_name\":\"Briceño\",\"age\":\"12\",\"email\":\"ligibrial@unal.edu.co\"}\n"=>nil}
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 5ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:29:10 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as */*
+  Parameters: {"\n{\"first_name\":\"item1\",\"last_name\":\"Briceño\",\"age\":\"12\",\"email\":\"ligibrial@unal.edu.co\"}\n"=>nil}
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:54:in `user_params'
+app/controllers/users_controller.rb:23:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:29:57 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"item1", "last_name"=>"Briceño", "age"=>"12", "email"=>"ligibrial@unal.edu.co", "user"=>{"first_name"=>"item1", "last_name"=>"Briceño", "age"=>"12", "email"=>"ligibrial@unal.edu.co"}}
+  [1m[35m (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 179ms (Views: 0.3ms | ActiveRecord: 3.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:30:32 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"item1", "last_name"=>"Briceño", "age"=>"12", "email"=>"ligibrial@unal.edu.co", "password"=>"[FILTERED]", "user"=>{"first_name"=>"item1", "last_name"=>"Briceño", "age"=>"12", "email"=>"ligibrial@unal.edu.co"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:31:20 -0500
+Processing by UsersController#create as */*
+  Parameters: {"email"=>"ligibrial@unal.edu.co", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"email"=>"ligibrial@unal.edu.co"}}
+  [1m[35m (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 8ms (Views: 0.3ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:34:59 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"payaso", "email"=>"ligibrial@mail.comm", "age"=>16, "password"=>"[FILTERED]", "user"=>{"first_name"=>"liss", "last_name"=>"payaso", "age"=>16, "email"=>"ligibrial@mail.comm"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 8ms (Views: 0.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:37:46 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"payaso", "email"=>"ligibrial@mail.comm", "age"=>16, "password"=>"[FILTERED]", "user"=>{"first_name"=>"liss", "last_name"=>"payaso", "age"=>16, "email"=>"ligibrial@mail.comm"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 12ms (Views: 0.2ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:38:10 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"payaso", "email"=>"ligibrial@mail.comm", "age"=>16, "password"=>"[FILTERED]", "user"=>{"first_name"=>"liss", "last_name"=>"payaso", "age"=>16, "email"=>"ligibrial@mail.comm"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 14ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:39:15 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"payaso", "email"=>"ligibrial@mail.comm", "age"=>16, "password"=>"[FILTERED]", "user"=>{"first_name"=>"liss", "last_name"=>"payaso", "age"=>16, "email"=>"ligibrial@mail.comm"}}
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 2.0ms)
+
+
+  
+TypeError (no implicit conversion of User into String):
+  
+app/controllers/users_controller.rb:24:in `+'
+app/controllers/users_controller.rb:24:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:40:08 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"payaso", "email"=>"ligibrial@mail.comm", "age"=>16, "password"=>"[FILTERED]", "user"=>{"first_name"=>"liss", "last_name"=>"payaso", "age"=>16, "email"=>"ligibrial@mail.comm"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 14ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:40:36 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"payaso", "email"=>"ligibrial@mail.comm", "age"=>16, "password"=>"[FILTERED]", "user"=>{"first_name"=>"liss", "last_name"=>"payaso", "age"=>16, "email"=>"ligibrial@mail.comm"}}
+  [1m[35m (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 12ms (Views: 0.2ms | ActiveRecord: 3.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:41:51 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"payaso", "email"=>"ligibrial@mail.comm", "age"=>16, "password"=>"[FILTERED]", "pass"=>"123456789", "user"=>{"first_name"=>"liss", "last_name"=>"payaso", "age"=>16, "email"=>"ligibrial@mail.comm"}}
+  [1m[35m (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 5ms (Views: 0.2ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:43:27 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"payaso", "email"=>"ligibrial@mail.comm", "age"=>16, "password"=>"[FILTERED]", "pass"=>"123456789", "user"=>{"first_name"=>"liss", "last_name"=>"payaso", "age"=>16, "email"=>"ligibrial@mail.comm"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 12ms (Views: 0.2ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:44:58 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"payaso", "email"=>"ligibrial@mail.comm", "age"=>16, "password_digest"=>"[FILTERED]", "pass"=>"123456789", "user"=>{"first_name"=>"liss", "last_name"=>"payaso", "age"=>16, "email"=>"ligibrial@mail.comm", "password_digest"=>"[FILTERED]"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1560.1ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "liss"], ["last_name", "payaso"], ["age", "16"], ["email", "ligibrial@mail.comm"], ["password_digest", "123456789"], ["created_at", "2017-09-21 19:44:58.540524"], ["updated_at", "2017-09-21 19:44:58.540524"]]
+  [1m[35m (182.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 1756ms (Views: 1.2ms | ActiveRecord: 1742.1ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:46:19 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"mañana", "email"=>"ligibrial@mail.comm", "age"=>16, "password_digest"=>"[FILTERED]", "user"=>{"first_name"=>"liss", "last_name"=>"mañana", "age"=>16, "email"=>"ligibrial@mail.comm", "password_digest"=>"[FILTERED]"}}
+  [1m[35m (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "liss"], ["last_name", "mañana"], ["age", "16"], ["email", "ligibrial@mail.comm"], ["password_digest", "123456789"], ["created_at", "2017-09-21 19:46:19.592160"], ["updated_at", "2017-09-21 19:46:19.592160"]]
+  [1m[35m (253.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 269ms (Views: 1.5ms | ActiveRecord: 255.0ms)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2017-09-21 14:47:06 -0500
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"ligibrial@mail.comm", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ligibrial@mail.comm", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ligibrial@mail.comm"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 1.0ms)
+
+
+  
+BCrypt::Errors::InvalidHash (invalid hash):
+  
+app/commands/authenticate_user.rb:16:in `user'
+app/commands/authenticate_user.rb:9:in `call'
+app/controllers/authentication_controller.rb:6:in `authenticate'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 14:47:46 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"mañana", "email"=>"ligijiji@mail.com", "age"=>16, "password_digest"=>"[FILTERED]", "user"=>{"first_name"=>"liss", "last_name"=>"mañana", "age"=>16, "email"=>"ligijiji@mail.com", "password_digest"=>"[FILTERED]"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "liss"], ["last_name", "mañana"], ["age", "16"], ["email", "ligijiji@mail.com"], ["password_digest", "123456789"], ["created_at", "2017-09-21 19:47:46.196113"], ["updated_at", "2017-09-21 19:47:46.196113"]]
+  [1m[35m (133.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 146ms (Views: 2.5ms | ActiveRecord: 134.0ms)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2017-09-21 14:47:54 -0500
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"ligijiji@mail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ligijiji@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ligijiji@mail.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+BCrypt::Errors::InvalidHash (invalid hash):
+  
+app/commands/authenticate_user.rb:16:in `user'
+app/commands/authenticate_user.rb:9:in `call'
+app/controllers/authentication_controller.rb:6:in `authenticate'
+Started GET "/users" for 127.0.0.1 at 2017-09-21 14:48:16 -0500
+Processing by UsersController#index as */*
+  Parameters: {"user"=>{}}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant UsersController::UserSerializer):
+  
+app/controllers/users_controller.rb:9:in `index'
+Started POST "/authenticate" for 127.0.0.1 at 2017-09-21 14:48:49 -0500
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"ligijiji@mail.com", "password_digest"=>"[FILTERED]", "authentication"=>{"email"=>"ligijiji@mail.com", "password_digest"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ligijiji@mail.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+
+
+  
+BCrypt::Errors::InvalidHash (invalid hash):
+  
+app/commands/authenticate_user.rb:16:in `user'
+app/commands/authenticate_user.rb:9:in `call'
+app/controllers/authentication_controller.rb:6:in `authenticate'
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "example@mail.com"], ["password_digest", "$2a$10$3JGzCOVIc/DufYJCDFXSGuc6pTp7Lk6MK4PkI/f54Cf9E8MpbNUo."], ["created_at", "2017-09-21 19:59:46.164293"], ["updated_at", "2017-09-21 19:59:46.164293"]]
+  [1m[35m (1080.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started POST "/users" for 127.0.0.1 at 2017-09-21 15:26:39 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"mañana", "email"=>"ligijiji@mail.com", "age"=>16, "password"=>"[FILTERED]", "user"=>{"first_name"=>"liss", "last_name"=>"mañana", "age"=>16, "email"=>"ligijiji@mail.com"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 16ms (Views: 0.3ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 15:26:50 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"liss", "last_name"=>"mañana", "email"=>"ligijiji@mail.com", "age"=>16, "password_digest"=>"[FILTERED]", "user"=>{"first_name"=>"liss", "last_name"=>"mañana", "age"=>16, "email"=>"ligijiji@mail.com", "password_digest"=>"[FILTERED]"}}
+  [1m[35m (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "liss"], ["last_name", "mañana"], ["age", "16"], ["email", "ligijiji@mail.com"], ["password_digest", "123456789"], ["created_at", "2017-09-21 20:26:50.927082"], ["updated_at", "2017-09-21 20:26:50.927082"]]
+  [1m[35m (155.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 165ms (Views: 0.9ms | ActiveRecord: 157.0ms)
+
+
+  [1m[35m (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "example@mail.com"], ["password_digest", "$2a$10$QoyPSwOetbLDnrd.IL1aj.OeUDGGRdbgjBTke3F8I9sYkAemhLEQO"], ["created_at", "2017-09-21 20:29:25.476921"], ["updated_at", "2017-09-21 20:29:25.476921"]]
+  [1m[35m (984.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "passenger@mail.com"], ["password_digest", "$2a$10$vix4MgseP3oKzIcfVN/QU.oBkKom35i/a9R7kmap.hFmD9XyhycR6"], ["created_at", "2017-09-21 20:30:59.925324"], ["updated_at", "2017-09-21 20:30:59.925324"]]
+  [1m[35m (166.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+Started POST "/users" for 127.0.0.1 at 2017-09-21 15:32:53 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"eduardo", "last_name"=>"beltran", "email"=>"ligsdfi@mail.com", "age"=>16, "password_digest"=>"[FILTERED]", "user"=>{"first_name"=>"eduardo", "last_name"=>"beltran", "age"=>16, "email"=>"ligsdfi@mail.com", "password_digest"=>"[FILTERED]"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (2575.1ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "eduardo"], ["last_name", "beltran"], ["age", "16"], ["email", "ligsdfi@mail.com"], ["password_digest", "123456789"], ["created_at", "2017-09-21 20:32:53.842839"], ["updated_at", "2017-09-21 20:32:53.842839"]]
+  [1m[35m (250.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 2835ms (Views: 1.2ms | ActiveRecord: 2825.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 15:39:03 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Carlos", "last_name"=>"Valderrama", "email"=>"elpibe@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"Carlos", "last_name"=>"Valderrama", "age"=>56, "email"=>"elpibe@mail.com"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 16ms (Views: 0.3ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 15:39:14 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Carlos", "last_name"=>"Valderrama", "email"=>"elpibe@mail.com", "age"=>56, "password_digest"=>"[FILTERED]", "user"=>{"first_name"=>"Carlos", "last_name"=>"Valderrama", "age"=>56, "email"=>"elpibe@mail.com", "password_digest"=>"[FILTERED]"}}
+  [1m[35m (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Carlos"], ["last_name", "Valderrama"], ["age", "56"], ["email", "elpibe@mail.com"], ["password_digest", "9999999"], ["created_at", "2017-09-21 20:39:14.528613"], ["updated_at", "2017-09-21 20:39:14.528613"]]
+  [1m[35m (2047.1ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 2058ms (Views: 1.0ms | ActiveRecord: 2049.1ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 15:45:47 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Carlos", "last_name"=>"Valderrama", "email"=>"elpibe@mail.com", "age"=>56, "password_digest"=>"[FILTERED]", "user"=>{"first_name"=>"Carlos", "last_name"=>"Valderrama", "age"=>56, "email"=>"elpibe@mail.com", "password_digest"=>"[FILTERED]"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Carlos"], ["last_name", "Valderrama"], ["age", "56"], ["email", "elpibe@mail.com"], ["password_digest", "9999999"], ["created_at", "2017-09-21 20:45:57.895685"], ["updated_at", "2017-09-21 20:45:57.895685"]]
+  [1m[35m (2090.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 2112ms (Views: 1.4ms | ActiveRecord: 2093.1ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 15:46:36 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Carlos", "last_name"=>"Valderrama", "email"=>"elpibe@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"Carlos", "last_name"=>"Valderrama", "age"=>56, "email"=>"elpibe@mail.com"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 6ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 15:48:30 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Carlos", "last_name"=>"Valderrama", "email"=>"elpibe@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"Carlos", "last_name"=>"Valderrama", "age"=>56, "email"=>"elpibe@mail.com"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "example@mail.com"], ["password_digest", "$2a$10$b6wq3D/rq05lWFvFZKaH/OfKF89kzH/cF4lcwVyMDPzjh51.Rza1C"], ["created_at", "2017-09-21 20:48:35.923723"], ["updated_at", "2017-09-21 20:48:35.923723"]]
+  [1m[35m (432.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 5800ms (Views: 2.3ms | ActiveRecord: 433.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 15:52:05 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Carlos", "last_name"=>"Valderrama", "email"=>"elpibe@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"Carlos", "last_name"=>"Valderrama", "age"=>56, "email"=>"elpibe@mail.com"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 18ms (ActiveRecord: 1.0ms)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Password can't be blank):
+  
+app/controllers/users_controller.rb:27:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-09-21 15:54:52 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Carlos", "last_name"=>"Valderrama", "email"=>"elpibe@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"Carlos", "last_name"=>"Valderrama", "age"=>56, "email"=>"elpibe@mail.com"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 14ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Password can't be blank):
+  
+app/controllers/users_controller.rb:27:in `create'
+Started POST "/users?password=[FILTERED]" for 127.0.0.1 at 2017-09-21 15:55:56 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Carlos", "last_name"=>"Valderrama", "email"=>"elpibe@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"Carlos", "last_name"=>"Valderrama", "age"=>56, "email"=>"elpibe@mail.com"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 6ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Password can't be blank):
+  
+app/controllers/users_controller.rb:27:in `create'
+Started POST "/users?password=[FILTERED]" for 127.0.0.1 at 2017-09-21 15:58:02 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Carlos", "last_name"=>"Valderrama", "email"=>"elpibe@mail.com", "age"=>56, "password"=>"[FILTERED]", "equis"=>"99999", "user"=>{"first_name"=>"Carlos", "last_name"=>"Valderrama", "age"=>56, "email"=>"elpibe@mail.com"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 9ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Password can't be blank):
+  
+app/controllers/users_controller.rb:27:in `create'
+Started POST "/users?password=[FILTERED]" for 127.0.0.1 at 2017-09-21 16:00:38 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Carlos", "last_name"=>"Valderrama", "email"=>"elpibe@mail.com", "age"=>56, "password"=>"[FILTERED]", "equis"=>"99999", "user"=>{"first_name"=>"Carlos", "last_name"=>"Valderrama", "age"=>56, "email"=>"elpibe@mail.com"}}
+  [1m[35m (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 13ms (ActiveRecord: 1.0ms)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Password can't be blank):
+  
+app/controllers/users_controller.rb:28:in `create'
+Started POST "/users?password=[FILTERED]" for 127.0.0.1 at 2017-09-21 16:03:11 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"marianito", "last_name"=>"Valderrama", "email"=>"mariane@mail.com", "age"=>56, "password"=>"[FILTERED]", "equis"=>"99999", "user"=>{"first_name"=>"marianito", "last_name"=>"Valderrama", "age"=>56, "email"=>"mariane@mail.com"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "mariane@mail.com"], ["password_digest", "$2a$10$IVfnGQQ/RfDm5oZC26jX0Odrbvvip9ibJXlnLI3HOM3TT8ORZVphq"], ["created_at", "2017-09-21 21:03:11.275204"], ["updated_at", "2017-09-21 21:03:11.275204"]]
+  [1m[35m (3050.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 3152ms (Views: 0.9ms | ActiveRecord: 3052.2ms)
+
+
+Started POST "/users?password=[FILTERED]" for 127.0.0.1 at 2017-09-21 16:07:23 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"marianito", "last_name"=>"Valderrama2", "email"=>"mariane2@mail.com", "age"=>56, "password"=>"[FILTERED]", "equis"=>"99999", "user"=>{"first_name"=>"marianito", "last_name"=>"Valderrama2", "age"=>56, "email"=>"mariane2@mail.com"}}
+Unpermitted parameters: equis, user
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "marianito"], ["last_name", "Valderrama2"], ["age", "56"], ["email", "mariane2@mail.com"], ["password_digest", "$2a$10$s/AONktDTiBO6K1qrdsD0uITVeCXrnUt6aa8oHJM0BKwabXT020RK"], ["created_at", "2017-09-21 21:07:23.783138"], ["updated_at", "2017-09-21 21:07:23.783138"]]
+  [1m[35m (1333.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 1434ms (Views: 1.2ms | ActiveRecord: 1334.1ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 16:07:42 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"marianito", "last_name"=>"Valderrama2", "email"=>"mariane2@mail.com", "age"=>56, "password"=>"[FILTERED]", "equis"=>"99999", "user"=>{"first_name"=>"marianito", "last_name"=>"Valderrama2", "age"=>56, "email"=>"mariane2@mail.com"}}
+Unpermitted parameters: equis, user
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (971.1ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "marianito"], ["last_name", "Valderrama2"], ["age", "56"], ["email", "mariane2@mail.com"], ["password_digest", "$2a$10$Ue1U.rKbmwkaGtSIEFSkReZko0XdPgVoNzO8XsOShiJHyLto37M8a"], ["created_at", "2017-09-21 21:07:42.112186"], ["updated_at", "2017-09-21 21:07:42.112186"]]
+  [1m[35m (411.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 1483ms (Views: 1.0ms | ActiveRecord: 1382.1ms)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2017-09-21 16:08:21 -0500
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"mariane2@mail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"mariane2@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mariane2@mail.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 94ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 16:08:48 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"marianitos", "last_name"=>"Valderramas", "email"=>"mariane243@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"marianitos", "last_name"=>"Valderramas", "age"=>56, "email"=>"mariane243@mail.com"}}
+Unpermitted parameter: user
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "marianitos"], ["last_name", "Valderramas"], ["age", "56"], ["email", "mariane243@mail.com"], ["password_digest", "$2a$10$GwbdzYbLpVlF6DxfN94qg.qfMhIPsl5gb0UPHtHob7HQW64Z7ZFFy"], ["created_at", "2017-09-21 21:08:48.309972"], ["updated_at", "2017-09-21 21:08:48.309972"]]
+  [1m[35m (134.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 231ms (Views: 0.9ms | ActiveRecord: 135.0ms)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2017-09-21 16:09:21 -0500
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"mariane243@mail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"mariane243@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mariane243@mail.com"], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mariane243@mail.com"], ["LIMIT", 1]]
+Completed 200 OK in 183ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/items" for 127.0.0.1 at 2017-09-21 16:10:12 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/items"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users" for 127.0.0.1 at 2017-09-21 16:10:22 -0500
+Processing by UsersController#index as */*
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant UsersController::UserSerializer):
+  
+app/controllers/users_controller.rb:9:in `index'
+Started GET "/testSession" for 127.0.0.1 at 2017-09-21 16:12:25 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/testSession"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/testSession" for 127.0.0.1 at 2017-09-21 16:13:27 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/testSession"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:13:29 -0500
+Processing by UsersController#testSession as */*
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant UsersController::UserSerializer):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:17:42 -0500
+Processing by UsersController#testSession as */*
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant UsersController::UserSerializer):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:19:09 -0500
+Processing by UsersController#testSession as */*
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant UsersController::UserSerializer):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:21:34 -0500
+Processing by UsersController#testSession as */*
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant UsersController::UserSerializer):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:24:01 -0500
+Processing by UsersController#testSession as */*
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant UsersController::UserSerializer):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:25:58 -0500
+Processing by UsersController#testSession as */*
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant UsersController::UserSerializer):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:26:11 -0500
+Processing by UsersController#testSession as */*
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant UsersController::UserSerializer):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:26:38 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#testSession as */*
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (0.0ms)
+Completed 500 Internal Server Error in 3061ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `read_attribute_for_serialization' for nil:NilClass):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:32:58 -0500
+Processing by UsersController#testSession as */*
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (0.0ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `read_attribute_for_serialization' for nil:NilClass):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:38:41 -0500
+Processing by UsersController#testSession as */*
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (0.0ms)
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `read_attribute_for_serialization' for nil:NilClass):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:48:07 -0500
+Processing by UsersController#testSession as */*
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (0.0ms)
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `read_attribute_for_serialization' for nil:NilClass):
+  
+app/controllers/users_controller.rb:18:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:54:23 -0500
+Processing by UsersController#testSession as */*
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (0.0ms)
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `read_attribute_for_serialization' for nil:NilClass):
+  
+app/controllers/users_controller.rb:19:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:54:57 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#testSession as */*
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (1.0ms)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `read_attribute_for_serialization' for nil:NilClass):
+  
+app/controllers/users_controller.rb:21:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:56:45 -0500
+Processing by UsersController#testSession as */*
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant UsersController::UserSerializer):
+  
+app/controllers/users_controller.rb:21:in `testSession'
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:58:26 -0500
+Processing by UsersController#testSession as */*
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.0ms)
+Completed 200 OK in 10ms (Views: 9.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/test" for 127.0.0.1 at 2017-09-21 16:59:16 -0500
+Processing by UsersController#testSession as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (2.0ms)
+Completed 200 OK in 22ms (Views: 15.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/test" for 127.0.0.1 at 2017-09-21 17:00:04 -0500
+Processing by UsersController#testSession as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.0ms)
+Completed 200 OK in 19ms (Views: 19.1ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/test" for 127.0.0.1 at 2017-09-21 17:03:45 -0500
+Processing by UsersController#testSession as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (3.0ms)
+Completed 200 OK in 10ms (Views: 8.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/test" for 127.0.0.1 at 2017-09-21 17:04:01 -0500
+Processing by UsersController#testSession as */*
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (2.0ms)
+Completed 200 OK in 6ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 17:38:51 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"marianitos", "last_name"=>"Valderramas", "email"=>"mariane253@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"marianitos", "last_name"=>"Valderramas", "age"=>56, "email"=>"mariane253@mail.com"}}
+Unpermitted parameter: user
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "marianitos"], ["last_name", "Valderramas"], ["age", "56"], ["email", "mariane253@mail.com"], ["password_digest", "$2a$10$hcOj/TcaEw4H5gAiRNyQW.VDrflJnZQCcsPzG9JhM91Q4WjHSdqfa"], ["created_at", "2017-09-21 22:38:56.024999"], ["updated_at", "2017-09-21 22:38:56.024999"]]
+  [1m[35m (2810.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (0.0ms)
+Completed 201 Created in 7454ms (Views: 27.4ms | ActiveRecord: 2813.2ms)
+
+
+Started DELETE "/users/17" for 127.0.0.1 at 2017-09-21 17:39:56 -0500
+Processing by UsersController#destroy as */*
+  Parameters: {"first_name"=>"marianitos", "last_name"=>"Valderramas", "email"=>"mariane253@mail.com", "age"=>56, "password"=>"[FILTERED]", "id"=>"17", "user"=>{"first_name"=>"marianitos", "last_name"=>"Valderramas", "age"=>56, "email"=>"mariane253@mail.com"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 17], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (32.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 17]]
+  [1m[35m (151.0ms)[0m  [1m[36mcommit transaction[0m
+Completed 204 No Content in 196ms (ActiveRecord: 185.0ms)
+
+
+Started GET "/users/17" for 127.0.0.1 at 2017-09-21 17:40:12 -0500
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"17", "user"=>{}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 17], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=17):
+  
+app/controllers/users_controller.rb:59:in `set_user'
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:40:36 -0500
+Processing by UsersController#index as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (3.0ms)
+Completed 200 OK in 8ms (Views: 5.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2017-09-21 17:41:30 -0500
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"luis@mail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"luis@mail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "luis@mail.com"], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "luis@mail.com"], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.0ms)
+Completed 200 OK in 187ms (Views: 5.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:41:48 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (3.0ms)
+Completed 200 OK in 8ms (Views: 6.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:41:52 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (2.0ms)
+Completed 200 OK in 5ms (Views: 3.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:41:59 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (2.0ms)
+Completed 200 OK in 5ms (Views: 4.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/items" for 127.0.0.1 at 2017-09-21 17:47:29 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/items"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/items" for 127.0.0.1 at 2017-09-21 17:47:50 -0500
+Processing by ItemsController#index as */*
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.0ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 24ms (Views: 13.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 17:49:23 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"marianitos", "last_name"=>"Valderramas", "email"=>"mariane13@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"marianitos", "last_name"=>"Valderramas", "age"=>56, "email"=>"mariane13@mail.com"}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.0ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 10ms (Views: 4.8ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 17:50:22 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"marianitos", "last_name"=>"Valderramas", "email"=>"mariane13@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"marianitos", "last_name"=>"Valderramas", "age"=>56, "email"=>"mariane13@mail.com"}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.0ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 10ms (Views: 5.5ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-09-21 17:51:57 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"marianitos", "last_name"=>"Valderramas", "email"=>"mariane13@mail.com", "age"=>56, "password"=>"[FILTERED]", "user"=>{"first_name"=>"marianitos", "last_name"=>"Valderramas", "age"=>56, "email"=>"mariane13@mail.com"}}
+Unpermitted parameter: user
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "age", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "marianitos"], ["last_name", "Valderramas"], ["age", "56"], ["email", "mariane13@mail.com"], ["password_digest", "$2a$10$9bg5E7gz8zE9Zb2lvhhsceEINHZYm6jqIbK7DTxIgPDIr6PYmQyqy"], ["created_at", "2017-09-21 22:51:57.524074"], ["updated_at", "2017-09-21 22:51:57.524074"]]
+  [1m[35m (610.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (1.0ms)
+Completed 201 Created in 731ms (Views: 8.2ms | ActiveRecord: 612.4ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:52:18 -0500
+Processing by UsersController#index as */*
+  Parameters: {"user"=>{}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.0ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 31ms (Views: 10.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:54:54 -0500
+Processing by UsersController#index as */*
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.0ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:55:10 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.0ms)
+Completed 200 OK in 16ms (Views: 13.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:55:23 -0500
+Processing by UsersController#index as */*
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.0ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 2.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:57:20 -0500
+Processing by UsersController#index as */*
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (1.0ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 2.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:57:34 -0500
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (2.0ms)
+Completed 200 OK in 425ms (Views: 420.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:58:04 -0500
+Processing by UsersController#index as */*
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.0ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 2.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2017-09-21 17:58:10 -0500
+Processing by UsersController#index as */*
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.0ms)
+Filter chain halted as :authenticate_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms)
+
+
+Started OPTIONS "/authenticate/" for 127.0.0.1 at 2017-10-09 16:17:18 -0500
+  
+Mysql2::Error (Unknown MySQL server host 'db_autenticateuser' (0)):
+  
+mysql2-0.4.9-x86 (mingw32) lib/mysql2/client.rb:89:in `connect'
+mysql2-0.4.9-x86 (mingw32) lib/mysql2/client.rb:89:in `initialize'
+activerecord (5.0.6) lib/active_record/connection_adapters/mysql2_adapter.rb:25:in `new'
+activerecord (5.0.6) lib/active_record/connection_adapters/mysql2_adapter.rb:25:in `mysql2_connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:729:in `new_connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:773:in `checkout_new_connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:752:in `try_to_checkout_new_connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:713:in `acquire_connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:490:in `checkout'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:364:in `connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:883:in `retrieve_connection'
+activerecord (5.0.6) lib/active_record/connection_handling.rb:128:in `retrieve_connection'
+activerecord (5.0.6) lib/active_record/connection_handling.rb:91:in `connection'
+activerecord (5.0.6) lib/active_record/migration.rb:559:in `connection'
+activerecord (5.0.6) lib/active_record/migration.rb:546:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.6) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.6) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.6) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/authenticate" for 127.0.0.1 at 2017-10-09 16:18:33 -0500
+  
+Mysql2::Error (Unknown MySQL server host 'db_autenticateuser' (0)):
+  
+mysql2-0.4.9-x86 (mingw32) lib/mysql2/client.rb:89:in `connect'
+mysql2-0.4.9-x86 (mingw32) lib/mysql2/client.rb:89:in `initialize'
+activerecord (5.0.6) lib/active_record/connection_adapters/mysql2_adapter.rb:25:in `new'
+activerecord (5.0.6) lib/active_record/connection_adapters/mysql2_adapter.rb:25:in `mysql2_connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:729:in `new_connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:773:in `checkout_new_connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:752:in `try_to_checkout_new_connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:713:in `acquire_connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:490:in `checkout'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:364:in `connection'
+activerecord (5.0.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:883:in `retrieve_connection'
+activerecord (5.0.6) lib/active_record/connection_handling.rb:128:in `retrieve_connection'
+activerecord (5.0.6) lib/active_record/connection_handling.rb:91:in `connection'
+activerecord (5.0.6) lib/active_record/migration.rb:559:in `connection'
+activerecord (5.0.6) lib/active_record/migration.rb:546:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.6) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.6) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.6) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `call'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
