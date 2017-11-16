@@ -1,0 +1,2 @@
+sa-api-gateway:
+ scale: 2
